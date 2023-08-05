@@ -18,7 +18,8 @@
           <el-table-column label="描述" align="center" prop="description"></el-table-column>
           <el-table-column label="操作" align="center">
             <template slot-scope="{row, $index}">
-              <el-button type="success" icon="el-icon-plus" size="mini" title="添加 SKU"></el-button>
+              <el-button type="success" icon="el-icon-plus" size="mini" title="添加 SKU"
+                         @click="addSkuOfSpu(row)"></el-button>
               <el-popconfirm :title="`确定要删除【${row.spuName}】这条 SPU 吗？`" @onConfirm="deleteSpu(row.id)"
                              style="margin: 0 10px">
                 <el-button
@@ -31,7 +32,8 @@
               </el-popconfirm>
               <el-button type="warning" icon="el-icon-edit" size="mini" title="编辑 SPU"
                          @click="editSPU(row)"></el-button>
-              <el-button type="info" icon="el-icon-view" size="mini" title="查看 SPU 下的 SKU"></el-button>
+              <el-button type="info" icon="el-icon-view" size="mini" title="查看 SPU 下的 SKU"
+                         @click="checkSkuList(row)"></el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -53,7 +55,21 @@
       <SpuForm v-show="scene === 2" @changeScene="changeScene" ref="spu"></SpuForm>
 
       <!-- 添加/编辑 SKU -->
-      <SkuForm v-show="scene === 3"></SkuForm>
+      <SkuForm v-show="scene === 3" @changeScene="changeScene" ref="sku"></SkuForm>
+
+      <!-- SPU 下的 SKU 列表 -->
+      <el-dialog :title="`《${clickedSpu.spuName}》下的 SKU 列表`" :visible.sync="dialogTableVisible">
+        <el-table :data="skuList">
+          <el-table-column property="skuName" label="名称" width="150"></el-table-column>
+          <el-table-column property="price" label="价格" width="200"></el-table-column>
+          <el-table-column property="weight" label="重量"></el-table-column>
+          <el-table-column label="默认图片">
+            <template slot-scope="{row, $index}">
+              <img :src="row.skuDefaultImg" alt="cover" style="width: 100px; height: 100px"/>
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-dialog>
     </el-card>
   </div>
 </template>
@@ -75,7 +91,10 @@ export default {
       size: 20,
       total: 0,
       // [1] SPU 数据列表；[2] 添加/编辑 SPU；[3] 添加/编辑 SKU
-      scene: 1
+      scene: 1,
+      dialogTableVisible: false,
+      skuList: [],
+      clickedSpu: {}
     }
   },
   methods: {
@@ -123,11 +142,24 @@ export default {
       this.scene = scene
       this.getSpuList()
     },
+    // 添加 SKU
+    addSkuOfSpu(row) {
+      this.scene = 3
+      // 调用子组件的方法，初始化 SPU 下的 SKU 数据
+      this.$refs.sku.initData(row, this.category1Id, this.category2Id, this.category3Id)
+    },
     // 删除 SPU
     async deleteSpu(spuId) {
       let res = await this.$api.spu.reqDeleteSpu(spuId);
       this.$message.success(res.message)
       this.getSpuList()
+    },
+    // 查看 SPU 下的 SKU
+    async checkSkuList(row) {
+      this.dialogTableVisible = true
+      let res = await this.$api.sku.reqSkuListOfSpu(row.id)
+      this.skuList = res.data
+      this.clickedSpu = row
     }
   }
 }

@@ -42,3 +42,9 @@ export const reqDeleteSpu = (spuId) => request({
   url: `/admin/product/deleteSpu/${spuId}`,
   method: 'delete'
 })
+
+// 获取 SPU 下的销售属性
+export const reqSpuSaleAttrs = (spuId) => request({
+  url: `/admin/product/spuSaleAttrList/${spuId}`,
+  method: 'get'
+})
