@@ -56,7 +56,26 @@ export default new VueRouter({
             path: '/register',
             component: () => import('@/views/user/Register'),
             meta: {footerShow: false}
-        }
-    ]
+        },
+        {
+            path: '/detail/:skuId',
+            component: () => import('@/views/detail/Detail'),
+            meta: {footerShow: false}
+        },
+        {
+            path: '/cart',
+            component: () => import('@/views/cart/Cart'),
+            meta: {footerShow: false}
+        },
+        {
+            path: '/cart/success',
+            component: () => import('@/views/cart/CartSuccess'),
+            meta: {footerShow: false}
+        },
+    ],
+    // 路由切换时回到最顶部
+    scrollBehavior() {
+        return {y: 0}
+    }
 })
 

@@ -23,21 +23,21 @@ const mutations = {
 const actions = {
     async categoryList({commit}) {
         let result = await reqCategoryList()
-        if (result.code == successCode) {
+        if (result.code === successCode) {
             commit('CATEGORYLIST', result.data)
         }
     },
 
     async bannerList({commit}) {
         let result = await reqBannerList()
-        if (result.code == successCode) {
+        if (result.code === successCode) {
             commit('BANNERLIST', result.data)
         }
     },
 
     async floorList({commit}) {
         let result = await reqFloorList()
-        if (result.code == successCode) {
+        if (result.code === successCode) {
             commit('FLOORLIST', result.data)
         }
     }

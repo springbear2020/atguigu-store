@@ -72,7 +72,7 @@
           </li>
         </ul>
         <div class="ads">
-          <img src="../../assets/images/home/ad1.png"/>
+          <img alt="image" src="./images/ad1.png"/>
         </div>
       </div>
     </div>
@@ -170,7 +170,7 @@ export default {
           width: 25%;
 
           .list-item {
-            background-image: url(../../assets/images/home/icons.png);
+            background-image: url(./images/icons.png);
             width: 61px;
             height: 40px;
             display: block;

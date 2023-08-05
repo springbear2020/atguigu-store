@@ -2,8 +2,8 @@
   font-family: icon-pc;
   src: url(../fonts//icon-pc.eot?59lb71);
   src: url(../fonts//icon-pc.eot?#iefix59lb71) format("embedded-opentype"),
-    url(../fonts//icon-pc.woff?59lb71) format("woff"),
-    url(../fonts//icon-pc.ttf?59lb71) format("truetype"),
+    /*url(../fonts//icon-pc.woff?59lb71) format("woff"),*/
+    /*url(../fonts//icon-pc.ttf?59lb71) format("truetype"),*/
     url(../fonts//icon-pc.svg?59lb71#icon-pc) format("svg");
   font-weight: 400;
   font-style: normal;

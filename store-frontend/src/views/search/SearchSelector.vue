@@ -135,7 +135,6 @@ export default {
 
       .sui-btn {
         display: inline-block;
-        padding: 2px 14px;
         box-sizing: border-box;
         margin-bottom: 0;
         font-size: 12px;

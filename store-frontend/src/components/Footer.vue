@@ -55,7 +55,7 @@
         </div>
         <div class="footerItem">
           <h4>帮助中心</h4>
-          <img src="../assets/images/wx_cz.jpg"/>
+          <img src="../assets/images/wechat.jpg" alt="wechat link"/>
         </div>
       </div>
       <div class="copyright">

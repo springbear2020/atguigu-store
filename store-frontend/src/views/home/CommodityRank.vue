@@ -3,19 +3,19 @@
   <div class="rank">
     <div class="tab">
       <div class="tab-tit clearfix">
-        <a href="javascript:;" class="on">
+        <a href="javascript:" class="on">
           <p class="img">
             <i></i>
           </p>
           <p class="text">热卖排行</p>
         </a>
-        <a href="javascript:;">
+        <a href="javascript:">
           <p class="img">
             <i></i>
           </p>
           <p class="text">特价排行</p>
         </a>
-        <a href="javascript:;">
+        <a href="javascript:">
           <p class="img">
             <i></i>
           </p>
@@ -29,7 +29,7 @@
           <div class="img-item">
             <p class="tab-pic">
               <a href="#">
-                <img src="../../assets/images/home/1.jpg"/>
+                <img alt="image" src="./images/1.jpg"/>
               </a>
             </p>
             <div class="tab-info">
@@ -45,7 +45,7 @@
           <div class="img-item">
             <p class="tab-pic">
               <a href="#">
-                <img src="../../assets/images/home/1.jpg"/>
+                <img alt="image" src="./images/1.jpg"/>
               </a>
             </p>
             <div class="tab-info">
@@ -61,7 +61,7 @@
           <div class="img-item">
             <p class="tab-pic">
               <a href="#">
-                <img src="../../assets/images/home/1.jpg"/>
+                <img alt="image" src="./images/1.jpg"/>
               </a>
             </p>
             <div class="tab-info">
@@ -77,7 +77,7 @@
           <div class="img-item">
             <p class="tab-pic">
               <a href="#">
-                <img src="../../assets/images/home/1.jpg"/>
+                <img alt="image" src="./images/1.jpg"/>
               </a>
             </p>
             <div class="tab-info">
@@ -135,7 +135,7 @@ export default {
             width: 35px;
             height: 35px;
             display: block;
-            background: url(../../assets/images/home/bg0.png);
+            background: url(./images/bg0.png);
             margin-left: 10px;
           }
         }

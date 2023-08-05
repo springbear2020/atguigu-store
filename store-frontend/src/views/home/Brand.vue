@@ -4,34 +4,34 @@
     <div class="py-container">
       <ul class="brand-list">
         <li class="brand-item">
-          <img src="../../assets/images/home/brand_21.png"/>
+          <img alt="image" src="./images/brand_21.png"/>
         </li>
         <li class="brand-item">
-          <img src="../../assets/images/home/brand_03.png"/>
+          <img alt="image" src="./images/brand_03.png"/>
         </li>
         <li class="brand-item">
-          <img src="../../assets/images/home/brand_05.png"/>
+          <img alt="image" src="./images/brand_05.png"/>
         </li>
         <li class="brand-item">
-          <img src="../../assets/images/home/brand_07.png"/>
+          <img alt="image" src="./images/brand_07.png"/>
         </li>
         <li class="brand-item">
-          <img src="../../assets/images/home/brand_09.png"/>
+          <img alt="image" src="./images/brand_09.png"/>
         </li>
         <li class="brand-item">
-          <img src="../../assets/images/home/brand_11.png"/>
+          <img alt="image" src="./images/brand_11.png"/>
         </li>
         <li class="brand-item">
-          <img src="../../assets/images/home/brand_13.png"/>
+          <img alt="image" src="./images/brand_13.png"/>
         </li>
         <li class="brand-item">
-          <img src="../../assets/images/home/brand_15.png"/>
+          <img alt="image" src="./images/brand_15.png"/>
         </li>
         <li class="brand-item">
-          <img src="../../assets/images/home/brand_17.png"/>
+          <img alt="image" src="./images/brand_17.png"/>
         </li>
         <li class="brand-item">
-          <img src="../../assets/images/home/brand_19.png"/>
+          <img alt="image" src="./images/brand_19.png"/>
         </li>
       </ul>
     </div>

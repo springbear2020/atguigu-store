@@ -64,14 +64,14 @@
         </transition>
       </div>
       <nav class="nav">
-        <a href="###">服装城</a>
-        <a href="###">美妆馆</a>
-        <a href="###">尚品汇超市</a>
-        <a href="###">全球购</a>
-        <a href="###">闪购</a>
-        <a href="###">团购</a>
-        <a href="###">有趣</a>
-        <a href="###">秒杀</a>
+        <a href="#">服装城</a>
+        <a href="#">美妆馆</a>
+        <a href="#">尚品汇超市</a>
+        <a href="#">全球购</a>
+        <a href="#">闪购</a>
+        <a href="#">团购</a>
+        <a href="#">有趣</a>
+        <a href="#">秒杀</a>
       </nav>
     </div>
   </div>
@@ -183,7 +183,6 @@ export default {
       top: 45px;
       width: 210px;
       height: 461px;
-      position: absolute;
       background: #fafafa;
       z-index: 999;
 
@@ -272,7 +271,7 @@ export default {
     /* 过渡动画 */
 
     .sort-enter {
-      height: 0px;
+      height: 0;
     }
 
     .sort-enter-to {

@@ -6,21 +6,26 @@
       <div class="container">
         <div class="loginList">
           <p>尚品汇欢迎您！</p>
-          <p>
+          <p v-if="userInfo.nickName">
+            <span>{{ userInfo.nickName }}</span>
+            <a class="register" @click="logout" style="cursor: pointer">退出登录</a>
+          </p>
+          <p v-else>
             <span>请</span>
             <router-link to="/login">登录</router-link>
             <router-link to="/register" class="register">免费注册</router-link>
           </p>
+
         </div>
         <div class="typeList">
-          <a href="###">我的订单</a>
-          <a href="###">我的购物车</a>
-          <a href="###">我的尚品汇</a>
-          <a href="###">尚品汇会员</a>
-          <a href="###">企业采购</a>
-          <a href="###">关注尚品汇</a>
-          <a href="###">合作招商</a>
-          <a href="###">商家后台</a>
+          <a href="#">我的订单</a>
+          <a href="#">我的购物车</a>
+          <a href="#">我的尚品汇</a>
+          <a href="#">尚品汇会员</a>
+          <a href="#">企业采购</a>
+          <a href="#">关注尚品汇</a>
+          <a href="#">合作招商</a>
+          <a href="#">商家后台</a>
         </div>
       </div>
     </div>
@@ -32,7 +37,7 @@
         </router-link>
       </h1>
       <div class="searchArea">
-        <form action="###" class="searchForm">
+        <form action="#" class="searchForm">
           <input
               type="text"
               id="autocomplete"
@@ -72,12 +77,28 @@ export default {
       }
       this.$router.push(reqObj);
     },
+    // 注销登录
+    async logout() {
+      try {
+        await this.$store.dispatch('userLogout')
+        this.$router.push({path: '/login'})
+      } catch (e) {
+        alert(e.message)
+      }
+    }
   },
   mounted() {
     // 全局事件注册
     this.$bus.$on('clearKeyword', () => {
       this.keyword = ''
     })
+    // 派发 action 获取用户信息
+    this.$store.dispatch('getUserInfo')
+  },
+  computed: {
+    userInfo() {
+      return this.$store.state.user.userInfo
+    }
   }
 };
 </script>
@@ -150,7 +171,7 @@ export default {
           box-sizing: border-box;
           width: 490px;
           height: 32px;
-          padding: 0px 4px;
+          padding: 0 4px;
           border: 2px solid #ea4a36;
           float: left;
 

@@ -44,17 +44,6 @@
                 <li :class="{active: hasTwo}" @click="changeOrderType('2')">
                   <a>价格 <span class="iconfont" v-show="hasTwo" :class="{'icon-down': isDesc, 'icon-up': isAsc}"></span></a>
                 </li>
-                <!--
-                <li>
-                  <a>销量</a>
-                </li>
-                <li>
-                  <a>新品</a>
-                </li>
-                <li>
-                  <a>评价</a>
-                </li>
-                -->
               </ul>
             </div>
           </div>
@@ -63,38 +52,30 @@
             <ul class="yui3-g">
               <li class="yui3-u-1-5" v-for="good in goodsList" :key="good.id">
                 <div class="list-wrap">
-                  <div class="p-img">
-                    <a href="item.html" target="_blank"
-                    ><img :src="good.defaultImg"
-                    /></a>
-                  </div>
-                  <div class="price">
-                    <strong>
-                      <em>¥ </em>
-                      <i>{{ good.price }}</i>
-                    </strong>
-                  </div>
-                  <div class="attr">
-                    <a
-                        target="_blank"
-                        href="item.html"
-                        title="促销信息，下单即赠送三个月CIBN视频会员卡！【小米电视新品4A 58 火爆预约中】"
-                    >{{ good.title }}</a
-                    >
-                  </div>
-                  <div class="commit">
-                    <i class="command">已有<span>2000</span>人评价</i>
+                  <div @click="checkDetail(good.id)" style="cursor: pointer">
+                    <div class="p-img">
+                      <a><img :src="good.defaultImg" alt="detail"/></a>
+                    </div>
+                    <div class="price">
+                      <strong>
+                        <em>¥ </em>
+                        <i>{{ good.price }}</i>
+                      </strong>
+                    </div>
+                    <div class="attr">
+                      <a>{{ good.title }}</a>
+                    </div>
+                    <div class="commit">
+                      <i class="command">已有<span>2000</span>人评价</i>
+                    </div>
                   </div>
                   <div class="operate">
                     <a
-                        href="success-cart.html"
                         target="_blank"
                         class="sui-btn btn-bordered btn-danger"
-                    >加入购物车</a
-                    >
+                    >加入购物车</a>
                     <a href="javascript:void(0);" class="sui-btn btn-bordered"
-                    >收藏</a
-                    >
+                    >收藏</a>
                   </div>
                 </div>
               </li>
@@ -103,7 +84,7 @@
           <!-- pages -->
           <Pagination :pageNum="conditions.pageNo" :pageSize="conditions.pageSize" :total="total"
                       :continues="5"
-          @changePageNumber="changePageNumber"></Pagination>
+                      @changePageNumber="changePageNumber"></Pagination>
         </div>
       </div>
     </div>
@@ -205,6 +186,10 @@ export default {
       console.log(current)
       this.conditions.pageNo = current
       this.fetchData()
+    },
+    // 查看商品详情
+    checkDetail(goodId) {
+      this.$router.push(`detail/${goodId}`)
     }
   },
   computed: {
