@@ -38,7 +38,7 @@ export default new VueRouter({
             meta: { footerShow: true }
         },
         {
-            path: '/search',
+            path: '/search/:keyword?',
             component: () => import('@/views/search/Search'),
             name: 'Search',
             meta: { footerShow: true }

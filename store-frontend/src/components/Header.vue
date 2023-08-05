@@ -61,7 +61,15 @@ export default {
   },
   methods: {
     goSearch() {
-      this.$router.push("/search?keyword=" + this.keyword);
+      let reqObj = {
+        name: "Search",
+        params: { keyword: this.keyword || undefined },
+      };
+      // 如果路径中存在 query 参数则一并携带
+      if (this.$route.query) {
+        reqObj.query = this.$route.query;
+      }
+      this.$router.push(reqObj);
     },
   },
 };

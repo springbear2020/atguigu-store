@@ -3,29 +3,8 @@
   <div class="list-container">
     <div class="sortList clearfix">
       <div class="center">
-        <!--banner轮播-->
-        <div class="swiper-container" id="mySwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="../../assets/images/home/banner1.jpg" />
-            </div>
-            <!-- <div class="swiper-slide">
-              <img src="../../assets/images/home/banner2.jpg" />
-            </div>
-            <div class="swiper-slide">
-              <img src="../../assets/images/home/banner3.jpg" />
-            </div>
-            <div class="swiper-slide">
-              <img src="../../assets/images/home/banner4.jpg" />
-            </div> -->
-          </div>
-          <!-- 如果需要分页器 -->
-          <div class="swiper-pagination"></div>
-
-          <!-- 如果需要导航按钮 -->
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
-        </div>
+        <!-- banner 轮播图 -->
+        <Carousel :bannerList="bannerList"></Carousel>
       </div>
       <div class="right">
         <div class="news">
@@ -101,11 +80,24 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+import Carousel from "@/components/Carousel.vue";
+
 export default {
   data() {
     return {};
   },
   methods: {},
+  mounted() {
+    // 通知 vuex 发起请求获取 mock 模拟的轮播图数据
+    this.$store.dispatch("bannerList");
+  },
+  computed: {
+    ...mapState({
+      bannerList: (state) => state.home.bannerList,
+    }),
+  },
+  components: { Carousel },
 };
 </script>
 

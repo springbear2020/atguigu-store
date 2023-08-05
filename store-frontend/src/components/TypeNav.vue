@@ -2,60 +2,66 @@
   <!-- 商品分类导航 -->
   <div class="type-nav">
     <div class="container">
-      <div @mouseleave="mouseLeave">
+      <div @mouseleave="categoryMouseLeave" @mouseenter="allCategoryMouseEnter">
         <h2 class="all">全部商品分类</h2>
-        <div class="sort">
-          <!-- 动态添加、移除样式 -->
-          <div class="all-sort-list2" @click="goSearch">
-            <div
-              class="item bo"
-              v-for="(category, index) in categoryList"
-              :key="category.categoryId"
-              :class="{ active: curIndex === index }"
-            >
-              <h3
-                @mouseenter="mouseEnter(index)"
-                :data-category-name="category.categoryName"
-                :data-category-id="category.categoryId"
+        <!-- 过渡动画 -->
+        <transition name="sort">
+          <div class="sort" v-show="isTypeNavShow">
+            <!-- 动态添加、移除样式 -->
+            <div class="all-sort-list2" @click="goSearch">
+              <div
+                class="item bo"
+                v-for="(category, index) in categoryList"
+                :key="category.categoryId"
+                :class="{ active: curIndex === index }"
               >
-                <a
+                <h3
+                  @mouseenter="categoryMouseEnter(index)"
                   :data-category-name="category.categoryName"
-                  :data-category-id="category.categoryId"
-                  >{{ category.categoryName }}</a
+                  :data-category1-id="category.categoryId"
                 >
-              </h3>
-              <div class="item-list clearfix" v-show="curIndex === index">
-                <div
-                  class="subitem"
-                  v-for="categoryChild in category.categoryChild"
-                  :key="categoryChild.categoryId"
-                >
-                  <dl class="fore">
-                    <dt>
-                      <a
-                        :data-category-name="categoryChild.categoryName"
-                        :data-category-id="categoryChild.categoryId"
-                        >{{ categoryChild.categoryName }}</a
-                      >
-                    </dt>
-                    <dd>
-                      <em
-                        v-for="item in categoryChild.categoryChild"
-                        :key="item.categoryId"
-                      >
+                  <a
+                    style="cursor: pointer"
+                    :data-category-name="category.categoryName"
+                    :data-category1-id="category.categoryId"
+                    >{{ category.categoryName }}</a
+                  >
+                </h3>
+                <div class="item-list clearfix" v-show="curIndex === index">
+                  <div
+                    class="subitem"
+                    v-for="categoryChild in category.categoryChild"
+                    :key="categoryChild.categoryId"
+                  >
+                    <dl class="fore">
+                      <dt>
                         <a
-                          :data-category-name="item.categoryName"
-                          :data-category-id="item.categoryId"
-                          >{{ item.categoryName }}</a
+                          style="cursor: pointer"
+                          :data-category-name="categoryChild.categoryName"
+                          :data-category2-id="categoryChild.categoryId"
+                          >{{ categoryChild.categoryName }}</a
                         >
-                      </em>
-                    </dd>
-                  </dl>
+                      </dt>
+                      <dd>
+                        <em
+                          v-for="item in categoryChild.categoryChild"
+                          :key="item.categoryId"
+                        >
+                          <a
+                            style="cursor: pointer"
+                            :data-category-name="item.categoryName"
+                            :data-category3-id="item.categoryId"
+                            >{{ item.categoryName }}</a
+                          >
+                        </em>
+                      </dd>
+                    </dl>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </transition>
       </div>
       <nav class="nav">
         <a href="###">服装城</a>
@@ -79,36 +85,63 @@ export default {
   data() {
     return {
       curIndex: -1,
+      isTypeNavShow: false,
     };
   },
   methods: {
     // 函数节流：将多次频繁触发优化为少量触发
-    mouseEnter: throttle(function (index) {
+    categoryMouseEnter: throttle(function (index) {
       this.curIndex = index;
     }, 100),
-    mouseLeave() {
+    categoryMouseLeave() {
       this.curIndex = -1;
+      if (this.$route.path !== "/home") {
+        this.isTypeNavShow = false;
+      }
+    },
+    allCategoryMouseEnter() {
+      if (this.$route.path !== "/home") {
+        this.isTypeNavShow = true;
+      }
     },
     // 利用编程式路由导航 + 事件委派实现路由传递参数
     goSearch(event) {
       let element = event.target;
-      let { categoryName, categoryId } = element.dataset;
-      if (categoryName && categoryId) {
-        this.$router.push({
-          path: "/search",
-          query: { categoryName: categoryName, categoryId: categoryId },
-        });
+      let { categoryName, category1Id, category2Id, category3Id } =
+        element.dataset;
+
+      // 拼接查询参数
+      if (categoryName) {
+        let conditions = { categoryName: categoryName };
+        if (category1Id) {
+          conditions.category1Id = category1Id;
+        } else if (category2Id) {
+          conditions.category2Id = category2Id;
+        } else if (category3Id) {
+          conditions.category3Id = category3Id;
+        }
+
+        let reqObj = { name: "Search", query: conditions };
+
+        // 如果路径中存在 params 参数则一并携带
+        if (this.$route.params) {
+          reqObj.params = this.$route.params;
+        }
+
+        this.$router.push(reqObj);
       }
     },
-  },
-  created() {
-    // 通知 Vuex 发请求获取数据存于仓库中
-    this.$store.dispatch("categoryList");
   },
   computed: {
     ...mapState({
       categoryList: (state) => state.home.categoryList,
     }),
+  },
+  mounted() {
+    // 首页默认展示三级联动导航栏
+    if (this.$route.path === "/home") {
+      this.isTypeNavShow = true;
+    }
   },
 };
 </script>
@@ -234,6 +267,19 @@ export default {
           background: skyblue;
         }
       }
+    }
+
+    /* 过渡动画 */
+    .sort-enter {
+      height: 0px;
+    }
+
+    .sort-enter-to {
+      height: 461px;
+    }
+
+    .sort-enter-active {
+      transition: all 0.5s linear;
     }
   }
 }
