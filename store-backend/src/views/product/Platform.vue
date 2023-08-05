@@ -140,7 +140,17 @@ export default {
     },
     // 删除属性
     handleDelete(row) {
-      alert('delete attr')
+      this.$confirm(`确认删除《${row.attrName}》这个平台属性吗？`, '删除提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        let result = await this.$api.platform.reqDeleteAttr(row.id)
+        this.$message.success(result.message)
+        this.attrList()
+      }).catch(() => {
+        this.$message.info('取消删除！');
+      });
     },
     // 编辑属性
     handleEdit(row) {

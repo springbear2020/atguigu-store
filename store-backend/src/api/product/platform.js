@@ -31,3 +31,15 @@ export const reqSaveOrUpdateAttr = (data) => request({
   data
 })
 
+// 获取平台所有销售属性
+export const reqSaleAttrList = () => request({
+  url: '/admin/product/baseSaleAttrList',
+  method: 'get'
+})
+
+// 根据 ID 删除平台销售属性
+export const reqDeleteAttr = (attrId) => request({
+  url: `/admin/product/deleteAttr/${attrId}`,
+  method: 'delete'
+})
+

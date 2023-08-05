@@ -31,3 +31,9 @@ export const reqDeleteBrand = (bid) => request({
   method: 'delete'
 })
 
+// 获取所有品牌信息
+export const reqBrandList = () => request({
+  url: '/admin/product/baseTrademark/getTrademarkList',
+  method: 'get'
+})
+

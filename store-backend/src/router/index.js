@@ -77,7 +77,7 @@ export const constantRoutes = [
       {
         path: 'spu',
         name: 'Spu',
-        component: () => import('@/views/product/Spu'),
+        component: () => import('@/views/product/spu/index'),
         meta: {title: 'SPU 管理', icon: 'el-icon-wallet'}
       },
       {
