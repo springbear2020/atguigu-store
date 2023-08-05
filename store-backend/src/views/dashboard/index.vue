@@ -1,30 +1,19 @@
 <template>
-  <div class="dashboard-container">
-    <div class="dashboard-text">name: {{ name }}</div>
+  <div>
+    <TopCard></TopCard>
+    <CenterCard></CenterCard>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import TopCard from "@/views/dashboard/top";
+import CenterCard from "@/views/dashboard/center";
 
 export default {
   name: 'Dashboard',
-  computed: {
-    ...mapGetters([
-      'name'
-    ])
-  }
+  components: {TopCard, CenterCard},
 }
 </script>
 
 <style lang="scss" scoped>
-.dashboard {
-  &-container {
-    margin: 30px;
-  }
-  &-text {
-    font-size: 30px;
-    line-height: 46px;
-  }
-}
 </style>
