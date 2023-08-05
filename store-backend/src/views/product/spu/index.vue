@@ -59,7 +59,7 @@
 
       <!-- SPU 下的 SKU 列表 -->
       <el-dialog :title="`《${clickedSpu.spuName}》下的 SKU 列表`" :visible.sync="dialogTableVisible">
-        <el-table :data="skuList">
+        <el-table :data="skuList" v-loading="loading">
           <el-table-column property="skuName" label="名称" width="150"></el-table-column>
           <el-table-column property="price" label="价格" width="200"></el-table-column>
           <el-table-column property="weight" label="重量"></el-table-column>
@@ -94,7 +94,8 @@ export default {
       scene: 1,
       dialogTableVisible: false,
       skuList: [],
-      clickedSpu: {}
+      clickedSpu: {},
+      loading: false
     }
   },
   methods: {
@@ -156,10 +157,12 @@ export default {
     },
     // 查看 SPU 下的 SKU
     async checkSkuList(row) {
+      this.loading = true
       this.dialogTableVisible = true
       let res = await this.$api.sku.reqSkuListOfSpu(row.id)
       this.skuList = res.data
       this.clickedSpu = row
+      this.loading = false
     }
   }
 }
