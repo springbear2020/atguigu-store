@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: '尚品汇后台管理系统',
+  title: '尚品汇后台管理',
 
   /**
    * @type {boolean} true | false

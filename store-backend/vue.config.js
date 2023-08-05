@@ -38,8 +38,12 @@ module.exports = {
     },
     // before: require('./mock/mock-server.js')
     proxy: {
-      '/dev-api': {
+      '/dev-api/admin/acl': {
         target: 'http://39.98.123.211:8170',
+        pathRewrite: {'^/dev-api': ''}
+      },
+      '/dev-api/admin': {
+        target: 'http://39.98.123.211:8510',
         pathRewrite: {'^/dev-api': ''}
       }
     }
