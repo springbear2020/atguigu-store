@@ -30,7 +30,7 @@ const getters = {
     },
     attrsList() {
         return state.searchList.attrsList || []
-    },
+    }
 }
 
 export default {

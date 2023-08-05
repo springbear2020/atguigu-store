@@ -4,13 +4,18 @@ import router from '@/router'
 import store from '@/store'
 // 注册商品分类导航为全局组件
 import TypeNav from '@/components/TypeNav'
+import Carousel from '@/components/Carousel'
+import Pagination from '@/components/Pagination'
 // 引入 Mock 模拟数据，让其执行一次
 import mockServe from '@/mock/mockServe'
 // 引入 swiper 轮播图样式
 import 'swiper/css/swiper.css'
 
 Vue.config.productionTip = false
+
 Vue.component('TypeNav', TypeNav)
+Vue.component('Carousel', Carousel)
+Vue.component('Pagination', Pagination)
 
 new Vue({
     render: h => h(App),
