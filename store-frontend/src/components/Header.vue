@@ -18,8 +18,8 @@
 
         </div>
         <div class="typeList">
-          <a href="#">我的订单</a>
-          <a href="#">我的购物车</a>
+          <router-link to="/cart">我的购物车</router-link>
+          <router-link to="/order/personal">我的订单</router-link>
           <a href="#">我的尚品汇</a>
           <a href="#">尚品汇会员</a>
           <a href="#">企业采购</a>
@@ -43,7 +43,6 @@
               id="autocomplete"
               class="input-error input-xxlarge"
               v-model="keyword"
-              @keydown.enter="goSearch"
           />
           <button
               class="sui-btn btn-xlarge btn-danger"
@@ -92,8 +91,6 @@ export default {
     this.$bus.$on('clearKeyword', () => {
       this.keyword = ''
     })
-    // 派发 action 获取用户信息
-    this.$store.dispatch('getUserInfo')
   },
   computed: {
     userInfo() {

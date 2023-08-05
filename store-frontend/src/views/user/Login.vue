@@ -78,7 +78,6 @@ export default {
   methods: {
     async login() {
       try {
-        console.log(this.rememberMe)
         await this.$store.dispatch('userLogin', {
           user: {
             phone: this.phone,
@@ -86,7 +85,9 @@ export default {
           },
           rememberMe: this.rememberMe
         })
-        this.$router.push({path: '/home'})
+        // 判断路由路径中是否携带了登录成功后的重定向跳转地址
+        let dstPath = this.$route.query.redirect || '/home'
+        this.$router.push({path: dstPath})
       } catch (e) {
         alert(e.message)
       }

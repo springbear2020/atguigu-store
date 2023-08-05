@@ -4,6 +4,7 @@ const successCode = 200
 
 const state = {
     code: '',
+    userToken: '',
     userInfo: {}
 }
 
@@ -11,11 +12,15 @@ const mutations = {
     GETVERIFYCODE(state, data) {
         state.code = data
     },
+    USERLOGIN(state, data) {
+        state.userToken = data
+    },
     USERINFO(state, data) {
         state.userInfo = data
     },
     USERLOGOUT(state) {
         state.userInfo = {}
+        state.userToken = ''
     }
 }
 
@@ -47,7 +52,7 @@ const actions = {
             } else {
                 sessionStorage.setItem('token', result.data.token)
             }
-            return 'success';
+            commit('USERLOGIN', result.data.token)
         } else {
             return Promise.reject(new Error('fail'))
         }
@@ -58,7 +63,7 @@ const actions = {
         if (result.code === successCode) {
             commit('USERINFO', result.data)
         } else {
-            return 'no user info'
+            return 'invalid user token'
         }
     },
     // 退出登录

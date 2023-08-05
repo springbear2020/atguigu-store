@@ -54,7 +54,7 @@
                 <div class="list-wrap">
                   <div @click="checkDetail(good.id)" style="cursor: pointer">
                     <div class="p-img">
-                      <a><img :src="good.defaultImg" alt="detail"/></a>
+                      <a><img v-lazy="good.defaultImg" alt="detail"/></a>
                     </div>
                     <div class="price">
                       <strong>
@@ -183,13 +183,12 @@ export default {
     },
     // 通过当前页面获取商品分页数据
     changePageNumber(current) {
-      console.log(current)
       this.conditions.pageNo = current
       this.fetchData()
     },
     // 查看商品详情
     checkDetail(goodId) {
-      this.$router.push(`detail/${goodId}`)
+      this.$router.push(`/detail/${goodId}`)
     }
   },
   computed: {
