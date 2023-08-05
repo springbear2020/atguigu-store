@@ -3,8 +3,8 @@
     <div class="type-wrap logo">
       <div class="fl key brand">品牌</div>
       <div class="value logos">
-        <ul class="logo-list">
-          <li v-for="trademark in trademarkList" :key="trademark.tmId">
+        <ul class="logo-list" style="cursor: pointer;">
+          <li v-for="trademark in trademarkList" :key="trademark.tmId" @click="searchBrand(trademark)">
             {{ trademark.tmName }}
           </li>
         </ul>
@@ -18,8 +18,8 @@
       <div class="fl key">{{ attr.attrName }}</div>
       <div class="fl value">
         <ul class="type-list">
-          <li v-for="(item, index) in attr.attrValueList" :key="index">
-            <a>{{ item }}</a>
+          <li v-for="(item, index) in attr.attrValueList" :key="index" @click="attrInfo(attr, item)">
+            <a style="cursor: pointer">{{ item }}</a>
           </li>
         </ul>
       </div>
@@ -29,17 +29,24 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import {mapGetters} from "vuex";
 
 export default {
   name: "SearchSelector",
   computed: {
     ...mapGetters(["trademarkList", "attrsList"]),
   },
-  mounted() {
-    console.log(this.trademarkList);
-    console.log(this.attrsList);
-  },
+  methods: {
+    searchBrand(trademark) {
+      // 子给父传递数据：自定义事件
+      this.$emit('trademarkInfo', trademark)
+    },
+    attrInfo(attr, attrVal) {
+      let params = `${attr.attrId}:${attrVal}:${attr.attrName}`
+      // 子给父传递数据：自定义事件
+      this.$emit('attrInfo', params)
+    }
+  }
 };
 </script>
 

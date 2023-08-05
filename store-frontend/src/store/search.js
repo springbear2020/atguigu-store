@@ -1,4 +1,4 @@
-import { reqCommoditySearch } from "@/api"
+import {reqCommoditySearch} from "@/api"
 
 const successCode = 200
 
@@ -13,7 +13,7 @@ const mutations = {
 }
 
 const actions = {
-    async commoditySearch({ commit }, conditions = {}) {
+    async commoditySearch({commit}, conditions = {}) {
         let result = await reqCommoditySearch(conditions)
         if (result.code === successCode) {
             commit('COMMODITYSEARCH', result.data)
@@ -24,10 +24,10 @@ const actions = {
 const getters = {
     trademarkList() {
         return state.searchList.trademarkList || []
-    }, 
+    },
     goodsList() {
         return state.searchList.goodsList || []
-    }, 
+    },
     attrsList() {
         return state.searchList.attrsList || []
     },

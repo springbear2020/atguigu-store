@@ -12,7 +12,9 @@ VueRouter.prototype.push = function (location, resolve, reject) {
     if (resolve && reject) {
         originPush.call(this, location, resolve, reject)
     } else {
-        originPush.call(this, location, () => { }, () => { })
+        originPush.call(this, location, () => {
+        }, () => {
+        })
     }
 }
 // 重写 replace 方法
@@ -20,7 +22,9 @@ VueRouter.prototype.replace = function (location, resolve, reject) {
     if (resolve && reject) {
         originReplace.call(this, location, resolve, reject)
     } else {
-        originReplace.call(this, location, () => { }, () => { })
+        originReplace.call(this, location, () => {
+        }, () => {
+        })
     }
 }
 
@@ -35,23 +39,23 @@ export default new VueRouter({
         {
             path: '/home',
             component: () => import('@/views/home/Home'),
-            meta: { footerShow: true }
+            meta: {footerShow: true}
         },
         {
             path: '/search/:keyword?',
             component: () => import('@/views/search/Search'),
             name: 'Search',
-            meta: { footerShow: true }
+            meta: {footerShow: true}
         },
         {
             path: '/login',
             component: () => import('@/views/user/Login'),
-            meta: { footerShow: false }
+            meta: {footerShow: false}
         },
         {
             path: '/register',
             component: () => import('@/views/user/Register'),
-            meta: { footerShow: false }
+            meta: {footerShow: false}
         }
     ]
 })

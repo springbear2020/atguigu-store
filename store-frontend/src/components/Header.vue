@@ -28,21 +28,22 @@
     <div class="bottom">
       <h1 class="logoArea">
         <router-link class="logo" title="尚品汇" to="/">
-          <img src="../assets/images/logo.png" alt="" />
+          <img src="../assets/images/logo.png" alt=""/>
         </router-link>
       </h1>
       <div class="searchArea">
         <form action="###" class="searchForm">
           <input
-            type="text"
-            id="autocomplete"
-            class="input-error input-xxlarge"
-            v-model="keyword"
+              type="text"
+              id="autocomplete"
+              class="input-error input-xxlarge"
+              v-model="keyword"
+              @keydown.enter="goSearch"
           />
           <button
-            class="sui-btn btn-xlarge btn-danger"
-            type="button"
-            @click="goSearch"
+              class="sui-btn btn-xlarge btn-danger"
+              type="button"
+              @click="goSearch"
           >
             搜索
           </button>
@@ -63,7 +64,7 @@ export default {
     goSearch() {
       let reqObj = {
         name: "Search",
-        params: { keyword: this.keyword || undefined },
+        params: {keyword: this.keyword || undefined},
       };
       // 如果路径中存在 query 参数则一并携带
       if (this.$route.query) {
@@ -72,6 +73,12 @@ export default {
       this.$router.push(reqObj);
     },
   },
+  mounted() {
+    // 全局事件注册
+    this.$bus.$on('clearKeyword', () => {
+      this.keyword = ''
+    })
+  }
 };
 </script>
 

@@ -4,7 +4,6 @@ import 'nprogress/nprogress.css'
 
 // axios 实例
 const requests = axios.create({
-    // TODO replace the base url
     baseURL: '/api',
     timeout: 5000
 })

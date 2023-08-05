@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TypeNav />
+    <TypeNav/>
     <div class="main">
       <div class="py-container">
         <!--bread-->
@@ -11,39 +11,50 @@
             </li>
           </ul>
           <ul class="fl sui-tag">
-            <li class="with-x">手机</li>
-            <li class="with-x">iphone<i>×</i></li>
-            <li class="with-x">华为<i>×</i></li>
-            <li class="with-x">OPPO<i>×</i></li>
+            <!-- 分类面包屑 -->
+            <li class="with-x" v-if="conditions.categoryName">
+              {{ conditions.categoryName }}<i @click="clearCategory">×</i>
+            </li>
+            <!-- 关键词面包屑 -->
+            <li class="with-x" v-if="conditions.keyword">
+              {{ conditions.keyword }}<i @click="clearKeyword">×</i>
+            </li>
+            <!-- 品牌面包屑 -->
+            <li class="with-x" v-if="conditions.trademark">
+              {{ conditions.trademark.split(':')[1] }}<i @click="clearBrand">×</i>
+            </li>
+            <!-- 商品属性 -->
+            <li class="with-x" v-if="conditions.props" v-for="(prop, index) in conditions.props" :key="index">
+              {{ prop.split(':')[1] }}<i @click="removeAttr(index)">×</i>
+            </li>
           </ul>
         </div>
 
         <!--selector-->
-        <SearchSelector />
+        <SearchSelector @trademarkInfo="trademarkInfo" @attrInfo="attrInfo"/>
 
-        <!--details-->
+        <!-- order -->
         <div class="details clearfix">
           <div class="sui-navbar">
             <div class="navbar-inner filter">
               <ul class="sui-nav">
-                <li class="active">
-                  <a href="#">综合</a>
+                <li :class="{active: hasOne}" @click="changeOrderType('1')">
+                  <a>综合 <span class="iconfont" v-show="hasOne" :class="{'icon-down': isDesc, 'icon-up': isAsc}"></span></a>
+                </li>
+                <li :class="{active: hasTwo}" @click="changeOrderType('2')">
+                  <a>价格 <span class="iconfont" v-show="hasTwo" :class="{'icon-down': isDesc, 'icon-up': isAsc}"></span></a>
+                </li>
+                <!--
+                <li>
+                  <a>销量</a>
                 </li>
                 <li>
-                  <a href="#">销量</a>
+                  <a>新品</a>
                 </li>
                 <li>
-                  <a href="#">新品</a>
+                  <a>评价</a>
                 </li>
-                <li>
-                  <a href="#">评价</a>
-                </li>
-                <li>
-                  <a href="#">价格⬆</a>
-                </li>
-                <li>
-                  <a href="#">价格⬇</a>
-                </li>
+                -->
               </ul>
             </div>
           </div>
@@ -54,7 +65,7 @@
                 <div class="list-wrap">
                   <div class="p-img">
                     <a href="item.html" target="_blank"
-                      ><img :src="good.defaultImg"
+                    ><img :src="good.defaultImg"
                     /></a>
                   </div>
                   <div class="price">
@@ -65,10 +76,10 @@
                   </div>
                   <div class="attr">
                     <a
-                      target="_blank"
-                      href="item.html"
-                      title="促销信息，下单即赠送三个月CIBN视频会员卡！【小米电视新品4A 58 火爆预约中】"
-                      >{{ good.title }}</a
+                        target="_blank"
+                        href="item.html"
+                        title="促销信息，下单即赠送三个月CIBN视频会员卡！【小米电视新品4A 58 火爆预约中】"
+                    >{{ good.title }}</a
                     >
                   </div>
                   <div class="commit">
@@ -76,13 +87,13 @@
                   </div>
                   <div class="operate">
                     <a
-                      href="success-cart.html"
-                      target="_blank"
-                      class="sui-btn btn-bordered btn-danger"
-                      >加入购物车</a
+                        href="success-cart.html"
+                        target="_blank"
+                        class="sui-btn btn-bordered btn-danger"
+                    >加入购物车</a
                     >
                     <a href="javascript:void(0);" class="sui-btn btn-bordered"
-                      >收藏</a
+                    >收藏</a
                     >
                   </div>
                 </div>
@@ -127,14 +138,13 @@
 
 <script>
 import SearchSelector from "./SearchSelector";
-import { mapGetters } from "vuex";
+import {mapGetters} from "vuex";
 
 export default {
   name: "Search",
   components: {
     SearchSelector,
   },
-
   data() {
     return {
       conditions: {
@@ -146,31 +156,104 @@ export default {
         // 商品属性数组
         props: [],
         trademark: "",
-        // 排序方式
-        order: "",
+        // 排序方式：默认 [综合:降序]
+        order: "1:desc",
         pageNo: 1,
         pageSize: 5,
       },
     };
   },
-
   created() {
     // 将路由路径中的参数信息赋值给条件查询对象
     Object.assign(this.conditions, this.$route.query, this.$route.params);
   },
-
   mounted() {
-    this.featchData();
+    this.fetchData();
   },
-
   methods: {
-    featchData() {
+    fetchData() {
       this.$store.dispatch("commoditySearch", this.conditions);
     },
-  },
+    // 清除商品分类信息，重新加载默认数据
+    clearCategory() {
+      this.conditions.categoryName = undefined;
+      if (this.$route.params) {
+        this.$router.push({name: "Search", params: this.$route.params});
+      } else {
+        this.$router.push({path: "/search"});
+      }
+    },
+    clearKeyword() {
+      this.conditions.keyword = undefined
+      // 通过全局事件总线通知 Header 组件清除搜索关键字
+      this.$bus.$emit('clearKeyword')
+      // 清除路由路径中的 params 参数
+      if (this.$route.params) {
+        this.$router.push({path: "/search", query: this.$route.query});
+      } else {
+        this.$router.push({path: "/search"});
+      }
+    },
+    // 自定义事件的回调函数
+    trademarkInfo(trademark) {
+      this.conditions.trademark = `${trademark.tmId}:${trademark.tmName}`
+      this.fetchData()
+    },
+    clearBrand() {
+      this.conditions.trademark = undefined
+      this.fetchData()
+    },
+    // 自定义事件的回调函数
+    attrInfo(params) {
+      if (this.conditions.props.indexOf(params) === -1) {
+        this.conditions.props.push(params)
+        this.fetchData();
+      }
+    },
+    // 移除商品属性
+    removeAttr(index) {
+      this.conditions.props.splice(index, 1);
+      this.fetchData();
+    },
+    // 修改商品排序方式
+    changeOrderType(whichClick) {
+      let originalNumber = this.hasOne ? '1' : '2'
+      let newOrder = this.isAsc ? 'desc' : 'asc'
 
+      if (whichClick !== originalNumber) {
+        newOrder = 'desc'
+      }
+      this.conditions.order = `${whichClick}:${newOrder}`
+      this.fetchData()
+    }
+  },
   computed: {
     ...mapGetters(["goodsList"]),
+    hasOne() {
+      return this.conditions.order.indexOf('1') !== -1;
+    },
+    hasTwo() {
+      return this.conditions.order.indexOf('2') !== -1;
+    },
+    isAsc() {
+      return this.conditions.order.indexOf('asc') !== -1;
+    },
+    isDesc() {
+      return this.conditions.order.indexOf('desc') !== -1;
+    }
+  },
+  watch: {
+    // 监听路由路径的变化，若发生改变则查询新的商品信息
+    $route(newVal, oldVal) {
+      if (newVal !== oldVal) {
+        // 将之前的查询条件置空
+        this.conditions.category1Id = undefined;
+        this.conditions.category2Id = undefined;
+        this.conditions.category3Id = undefined;
+        Object.assign(this.conditions, this.$route.query, this.$route.params);
+        this.fetchData();
+      }
+    },
   },
 };
 </script>

@@ -10,48 +10,48 @@
             <!-- 动态添加、移除样式 -->
             <div class="all-sort-list2" @click="goSearch">
               <div
-                class="item bo"
-                v-for="(category, index) in categoryList"
-                :key="category.categoryId"
-                :class="{ active: curIndex === index }"
+                  class="item bo"
+                  v-for="(category, index) in categoryList"
+                  :key="category.categoryId"
+                  :class="{ active: curIndex === index }"
               >
                 <h3
-                  @mouseenter="categoryMouseEnter(index)"
-                  :data-category-name="category.categoryName"
-                  :data-category1-id="category.categoryId"
-                >
-                  <a
-                    style="cursor: pointer"
+                    @mouseenter="categoryMouseEnter(index)"
                     :data-category-name="category.categoryName"
                     :data-category1-id="category.categoryId"
-                    >{{ category.categoryName }}</a
+                >
+                  <a
+                      style="cursor: pointer"
+                      :data-category-name="category.categoryName"
+                      :data-category1-id="category.categoryId"
+                  >{{ category.categoryName }}</a
                   >
                 </h3>
                 <div class="item-list clearfix" v-show="curIndex === index">
                   <div
-                    class="subitem"
-                    v-for="categoryChild in category.categoryChild"
-                    :key="categoryChild.categoryId"
+                      class="subitem"
+                      v-for="categoryChild in category.categoryChild"
+                      :key="categoryChild.categoryId"
                   >
                     <dl class="fore">
                       <dt>
                         <a
-                          style="cursor: pointer"
-                          :data-category-name="categoryChild.categoryName"
-                          :data-category2-id="categoryChild.categoryId"
-                          >{{ categoryChild.categoryName }}</a
+                            style="cursor: pointer"
+                            :data-category-name="categoryChild.categoryName"
+                            :data-category2-id="categoryChild.categoryId"
+                        >{{ categoryChild.categoryName }}</a
                         >
                       </dt>
                       <dd>
                         <em
-                          v-for="item in categoryChild.categoryChild"
-                          :key="item.categoryId"
+                            v-for="item in categoryChild.categoryChild"
+                            :key="item.categoryId"
                         >
                           <a
-                            style="cursor: pointer"
-                            :data-category-name="item.categoryName"
-                            :data-category3-id="item.categoryId"
-                            >{{ item.categoryName }}</a
+                              style="cursor: pointer"
+                              :data-category-name="item.categoryName"
+                              :data-category3-id="item.categoryId"
+                          >{{ item.categoryName }}</a
                           >
                         </em>
                       </dd>
@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import {mapState} from "vuex";
 import throttle from "lodash/throttle";
 
 export default {
@@ -107,12 +107,12 @@ export default {
     // 利用编程式路由导航 + 事件委派实现路由传递参数
     goSearch(event) {
       let element = event.target;
-      let { categoryName, category1Id, category2Id, category3Id } =
-        element.dataset;
+      let {categoryName, category1Id, category2Id, category3Id} =
+          element.dataset;
 
       // 拼接查询参数
       if (categoryName) {
-        let conditions = { categoryName: categoryName };
+        let conditions = {categoryName: categoryName};
         if (category1Id) {
           conditions.category1Id = category1Id;
         } else if (category2Id) {
@@ -121,7 +121,7 @@ export default {
           conditions.category3Id = category3Id;
         }
 
-        let reqObj = { name: "Search", query: conditions };
+        let reqObj = {name: "Search", query: conditions};
 
         // 如果路径中存在 params 参数则一并携带
         if (this.$route.params) {
@@ -270,6 +270,7 @@ export default {
     }
 
     /* 过渡动画 */
+
     .sort-enter {
       height: 0px;
     }

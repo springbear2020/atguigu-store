@@ -1,4 +1,4 @@
-import { reqCategoryList, reqBannerList, reqFloorList } from '@/api'
+import {reqCategoryList, reqBannerList, reqFloorList} from '@/api'
 
 const successCode = 200
 
@@ -21,21 +21,21 @@ const mutations = {
 }
 
 const actions = {
-    async categoryList({ commit }) {
+    async categoryList({commit}) {
         let result = await reqCategoryList()
         if (result.code == successCode) {
             commit('CATEGORYLIST', result.data)
         }
     },
 
-    async bannerList({ commit }) {
+    async bannerList({commit}) {
         let result = await reqBannerList()
         if (result.code == successCode) {
             commit('BANNERLIST', result.data)
         }
     },
 
-    async floorList({ commit }) {
+    async floorList({commit}) {
         let result = await reqFloorList()
         if (result.code == successCode) {
             commit('FLOORLIST', result.data)

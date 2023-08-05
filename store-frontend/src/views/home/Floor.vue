@@ -7,9 +7,9 @@
         <div class="fr">
           <ul class="nav-tabs clearfix">
             <li
-              :class="{ active: index === 0 }"
-              v-for="(nav, index) in list.navList"
-              :key="index"
+                :class="{ active: index === 0 }"
+                v-for="(nav, index) in list.navList"
+                :key="index"
             >
               <a :href="nav.url" data-toggle="tab">{{ nav.text }}</a>
             </li>
@@ -25,7 +25,7 @@
                   {{ keyword }}
                 </li>
               </ul>
-              <img :src="list.imgUrl" />
+              <img :src="list.imgUrl"/>
             </div>
             <div class="floorBanner">
               <!-- banner 轮播图 -->
@@ -34,22 +34,22 @@
             <div class="split">
               <span class="floor-x-line"></span>
               <div class="floor-conver-pit">
-                <img :src="list.recommendList[0]" />
+                <img :src="list.recommendList[0]"/>
               </div>
               <div class="floor-conver-pit">
-                <img :src="list.recommendList[1]" />
+                <img :src="list.recommendList[1]"/>
               </div>
             </div>
             <div class="split center">
-              <img :src="list.bigImg" />
+              <img :src="list.bigImg"/>
             </div>
             <div class="split">
               <span class="floor-x-line"></span>
               <div class="floor-conver-pit">
-                <img :src="list.recommendList[2]" />
+                <img :src="list.recommendList[2]"/>
               </div>
               <div class="floor-conver-pit">
-                <img :src="list.recommendList[3]" />
+                <img :src="list.recommendList[3]"/>
               </div>
             </div>
           </div>
@@ -67,7 +67,7 @@ export default {
     return {};
   },
   props: ["list"],
-  components: { Carousel },
+  components: {Carousel},
 };
 </script>
 

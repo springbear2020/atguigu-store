@@ -72,7 +72,7 @@
           </li>
         </ul>
         <div class="ads">
-          <img src="../../assets/images/home/ad1.png" />
+          <img src="../../assets/images/home/ad1.png"/>
         </div>
       </div>
     </div>
@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import {mapState} from "vuex";
 import Carousel from "@/components/Carousel.vue";
 
 export default {
@@ -97,7 +97,7 @@ export default {
       bannerList: (state) => state.home.bannerList,
     }),
   },
-  components: { Carousel },
+  components: {Carousel},
 };
 </script>
 

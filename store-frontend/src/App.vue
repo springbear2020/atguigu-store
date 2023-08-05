@@ -12,7 +12,7 @@ import Footer from "@/components/Footer";
 
 export default {
   name: "App",
-  components: { Header, Footer },
+  components: {Header, Footer},
   created() {
     /*
      * 通知 Vuex 发请求获取商品分类数据存于仓库中

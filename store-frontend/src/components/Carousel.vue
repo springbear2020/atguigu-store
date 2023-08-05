@@ -2,11 +2,11 @@
   <div class="swiper-container" id="mySwiper" ref="bannerSwiper">
     <div class="swiper-wrapper">
       <div
-        class="swiper-slide"
-        v-for="(banner, index) in bannerList"
-        :key="banner.id"
+          class="swiper-slide"
+          v-for="(banner, index) in bannerList"
+          :key="banner.id"
       >
-        <img :src="bannerList[index].imgUrl" />
+        <img :src="bannerList[index].imgUrl" alt="封面"/>
       </div>
     </div>
     <!-- 如果需要分页器 -->

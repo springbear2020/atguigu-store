@@ -18,7 +18,7 @@ import CommodityRank from "@/views/home/CommodityRank.vue";
 import GuessLike from "@/views/home/GuessLike.vue";
 import Floor from "@/views/home/Floor.vue";
 import Brand from "@/views/home/Brand.vue";
-import { mapState } from "vuex";
+import {mapState} from "vuex";
 
 export default {
   data() {
@@ -38,7 +38,7 @@ export default {
     this.$store.dispatch("floorList");
   },
   computed: {
-    ...mapState({ floorList: (state) => state.home.floorList }),
+    ...mapState({floorList: (state) => state.home.floorList}),
   },
 };
 </script>
