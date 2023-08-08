@@ -5,7 +5,6 @@ module.exports = defineConfig({
     // 打包时不生成 map 文件
     productionSourceMap: false,
     devServer: {
-        open: true,
         proxy: {
             '/api': {
                 // TODO replace the request url
