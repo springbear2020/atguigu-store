@@ -38,6 +38,8 @@
 
 # 四、功能架构
 
+![](document/img/4-功能架构.png)
+
 # 五、系统路由
 
 ## 5.1 前台应用系统
@@ -58,7 +60,7 @@
 src
 ├── api 		-- api 网络接口
 ├── assets 		-- 静态图片资源文件
-├── components 	-- 通用组件封装
+├── components  -- 通用组件封装
 ├── mock		-- 模拟数据
 ├── icons 		-- svg 矢量图片文件
 ├── router 		-- vue-router 路由配置
@@ -72,7 +74,63 @@ src
 
 ## 8.1 前台应用系统
 
+### 8.1.1 首页
+
+![](document/img/5-前台首页.png)
+
+### 8.1.2 商品搜索
+
+![](document/img/6-商品搜索.png)
+
+### 8.1.3 商品详情
+
+![](document/img/7-商品详情.png)
+
+### 8.1.4 购物车
+
+![](document/img/8-购物车.png)
+
+### 8.1.5 登录注册
+
+![](document/img/9-登录注册.png)
+
+### 8.1.6 订单交易
+
+![](document/img/10-订单交易.png)
+
+### 8.1.7 订单支付
+
+![](document/img/11-订单支付.png)
+
+### 8.1.8 我的订单
+
+![](document/img/12-我的订单.png)
+
 ## 8.2 后台管理系统
+
+### 8.2.1 登录
+
+![](document/img/13-后台登录.png)
+
+### 8.2.2 首页
+
+![](document/img/14-后台首页.png)
+
+### 8.2.3 平台属性
+
+![](document/img/16-平台属性.png)
+
+### 8.2.4 品牌管理
+
+![](document/img/15-品牌管理.png)
+
+### 8.2.5 SPU 管理
+
+![](document/img/17-SPU管理.png)
+
+### 8.2.6 SKU 管理
+
+![](document/img/18-SKU管理.png)
 
 # 九、许可证
 
