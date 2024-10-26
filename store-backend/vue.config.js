@@ -24,7 +24,7 @@ module.exports = {
    * In most cases please use '/' !!!
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
-  publicPath: '/',
+  publicPath: './',
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
@@ -38,13 +38,13 @@ module.exports = {
     },
     // before: require('./mock/mock-server.js')
     proxy: {
-      '/dev-api/admin/acl': {
+      '/atguigu-store-backend-api/admin/acl': {
         target: 'http://39.98.123.211:8170',
-        pathRewrite: {'^/dev-api': ''}
+        pathRewrite: {'^/atguigu-store-backend-api': ''}
       },
-      '/dev-api/admin': {
+      '/atguigu-store-backend-api/admin': {
         target: 'http://39.98.123.211:8510',
-        pathRewrite: {'^/dev-api': ''}
+        pathRewrite: {'^/atguigu-store-backend-api': ''}
       }
     }
   },

@@ -5,7 +5,7 @@ import {guestUUID} from '@/utils/uuid'
 
 // axios 实例
 const requests = axios.create({
-    baseURL: '/api',
+    baseURL: '/atguigu-store-frontend-api',
     timeout: 5000
 })
 
